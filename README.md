@@ -1,2 +1,4 @@
 # Zendesk-Coding-Challenge
-Qifeng Zeng's project for ZCC
+
+Type `flask run` to start the web viewer.
+
