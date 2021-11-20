@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - Mobile Tickets Viewer</title>
+        {% else %}
+        <title>Welcome to Mobile Tickets Viewer</title>
+        {% endif %}
+    </head>
+    <body>
+        {% for ticket in tickets %}
+        <div><p>Tickets with subject <b>{{ ticket.subject }}</b>
+            opened by <b> {{ ticket.requester_id }} </b>
+            created on <b>{{ ticket.created_at }} </b> </p></div>
+        {% endfor %}
+    </body>
+</html>
