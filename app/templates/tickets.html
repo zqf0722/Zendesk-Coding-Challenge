@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for ticket in tickets %}
+    <div>
+        <p>
+            <b> {{ ticket['id'] }} </b> Tickets with subject <b>{{ ticket['subject'] }}</b>
+        opened by <b> {{ ticket['requester_id'] }} </b>
+        created on <b> {{ ticket['created_at'] }} </b>
+        <br>
+        {{ ticket['description'] }}
+        </p>
+    </div>
+    {% endfor %}
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span> Previous tickets
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    More tikcets  <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+{% endblock %}
