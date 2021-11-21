@@ -8,12 +8,7 @@ from requests.auth import HTTPBasicAuth
 @app.before_request
 def before_request():
     g.search_form = SearchForm()
-
-
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/index', methods=['GET', 'POST'])
-def index():
-    url = app.config['SUB_DOMAIN']+'api/v2/tickets/count'
+    url = app.config['SUB_DOMAIN'] + 'api/v2/tickets/count'
     r = requests.get(url, auth=HTTPBasicAuth(app.config['EMAIL_ADDRESS'], app.config['API_TOKEN']))
     if r.status_code >= 400:
         text = r.text.replace('"', '')
@@ -22,7 +17,12 @@ def index():
         return render_template('requesterror.html', text=text)
     num = r.json()['count']['value']
     g.count = num
-    return render_template('index.html', count=num)
+
+
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
+def index():
+    return render_template('index.html')
 
 
 @app.route('/gettickets')
@@ -35,13 +35,25 @@ def gettickets():
     tickets = r.json()['tickets']
     prevurl = url_for('gettickets', url=r.json()['links']['prev']) if url != defaulturl else None
     nexturl = url_for('gettickets', url=r.json()['links']['next']) if r.json()['meta']['has_more'] else None
-    return render_template('tickets.html', tickets=tickets, prev_url=prevurl, next_url=nexturl)
+    return render_template('tickets.html', tickets=tickets, num=len(tickets), prev_url=prevurl, next_url=nexturl)
 
 
 @app.route('/search')
 def search():
-    ticket_id = str(g.search_form.id.data)
-    url = app.config['SUB_DOMAIN']+'api/v2/tickets/'+ticket_id
+    if g.search_form.validate_on_submit():
+        id = str(g.search_form.id.data)
+        url = app.config['SUB_DOMAIN']+'api/v2/tickets/'+id
+        r = requests.get(url, auth=HTTPBasicAuth(app.config['EMAIL_ADDRESS'], app.config['API_TOKEN']))
+        if r.status_code >= 400:
+            return render_template('requesterror.html', text=r.text)
+        if 'ticket' in r.json():
+            ticket = r.json()['ticket']
+            return render_template('ticketdetail.html', ticket=ticket)
+        else:
+            flash('Error, please input a valid id of a ticket')
+            return redirect(url_for('index'))
+    id = request.args.get('id', type=str)
+    url = app.config['SUB_DOMAIN'] + 'api/v2/tickets/' + id
     r = requests.get(url, auth=HTTPBasicAuth(app.config['EMAIL_ADDRESS'], app.config['API_TOKEN']))
     if r.status_code >= 400:
         return render_template('requesterror.html', text=r.text)
@@ -49,6 +61,5 @@ def search():
         ticket = r.json()['ticket']
         return render_template('ticketdetail.html', ticket=ticket)
     else:
-        flash('Error, please input a valid id of a ticket')
+        flash('Error, ticket went invalid.')
         return redirect(url_for('index'))
-

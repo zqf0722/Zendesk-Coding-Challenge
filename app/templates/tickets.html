@@ -1,14 +1,14 @@
 {% extends "base.html" %}
+
 {% block app_content %}
-    <h4> {{ g.count }} total tickets, {{ len(tickets) }} on this page</h4>
+    <h4> {{ g.count }} total tickets, {{ num }} on this page. Click on subject to view the detailed tickets.</h4>
     {% for ticket in tickets %}
     <div>
         <p>
-            <b> {{ ticket['id'] }} </b> Tickets with subject <b>{{ ticket['subject'] }}</b>
-        opened by <b> {{ ticket['requester_id'] }} </b>
-        created on <b> {{ ticket['created_at'] }} </b>
-        <br>
-        {{ ticket['description'] }}
+            <b> {{ ticket['id'] }} </b> Ticket with subject <b><a href="{{ url_for('search', id=ticket['id']) }}">
+            {{ ticket['subject'] }}</a></b>
+            opened by <b> {{ ticket['requester_id'] }} </b>
+            created on <b> {{ ticket['created_at'] }} </b>
         </p>
     </div>
     {% endfor %}
