@@ -31,16 +31,19 @@ class RequestAPICase(unittest.TestCase):
         self.assertTrue(flag,msg=content)
         tickets, prevurl, nexturl = content
         self.assertEqual(prevurl, None)
+        self.assertIsInstance(tickets, list)
         # test if the return next page and previous page is correct
         while nexturl:
             flag, content = self.request.ticketspage(nexturl)
             self.assertTrue(flag,msg=content)
             tickets, prevurl, nexturl = content
+            self.assertIsInstance(tickets, list)
         self.assertEqual(nexturl, None)
         while prevurl:
             flag, content = self.request.ticketspage(prevurl)
             self.assertTrue(flag,msg=content)
             tickets, prevurl, nexturl = content
+            self.assertIsInstance(tickets, list)
         self.assertEqual(prevurl, None)
 
 

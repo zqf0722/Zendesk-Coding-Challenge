@@ -11,6 +11,9 @@ def modtext(text):
     return out
 
 class Request():
+    def __init__(self):
+        self.errormessage = 'Invalid Response'
+
     def getcount(self):
         url = app.config['SUB_DOMAIN'] + 'api/v2/tickets/count'
         r = requests.get(url, auth=HTTPBasicAuth(app.config['EMAIL_ADDRESS'], app.config['API_TOKEN']))
@@ -18,6 +21,8 @@ class Request():
             text = modtext(r.text)
             return False, text['error']
         else:
+            if 'count' not in r.json():
+                return False, self.errormessage
             return True, r.json()['count']['value']
 
     def ticketspage(self, url):
@@ -29,6 +34,8 @@ class Request():
         if r.status_code >= 400:
             text = modtext(r.text)
             return False, text['error']
+        if 'tickets' not in r.json():
+            return False, self.errormessage
         tickets = r.json()['tickets']
         for ticket in tickets:
             ticket['created_at'] = datetime.strptime(ticket['created_at'], "%Y-%m-%dT%H:%M:%SZ")
@@ -43,6 +50,8 @@ class Request():
         if r.status_code >= 400:
             text = modtext(r.text)
             return False, text['error']
+        if 'tickets' not in r.json():
+            return False, self.errormessage
         tickets = r.json()['tickets']
         for ticket in tickets:
             ticket['created_at'] = datetime.strptime(ticket['created_at'], "%Y-%m-%dT%H:%M:%SZ")
@@ -61,6 +70,5 @@ class Request():
             ticket['updated_at'] = datetime.strptime(ticket['updated_at'], "%Y-%m-%dT%H:%M:%SZ")
             return True, (True, ticket)
         else:
-            error = 'Error, this ticket is invalid.'
-            return True, (False, error)
+            return True, (False, self.errormessage)
 

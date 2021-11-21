@@ -16,6 +16,20 @@
             {% endfor %}
         </h4>
     </div>
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if ticket['id']==1 %} disabled{% endif %}">
+                <a href="{{ url_for('search', id=ticket['id']-1) }}">
+                    <span aria-hidden="true">&larr;</span> Previous ticket
+                </a>
+            </li>
+            <li class="next{% if ticket['id']==g.count %} disabled{% endif %}">
+                <a href="{{ url_for('search', id=ticket['id']+1) }}">
+                    Next ticket  <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
     <h3> <a href="{{ url_for('index') }}"> Return to the Mainpage </a> </h3>
     <h3> <a href="{{ url_for('gettickets') }}"> Return to all tickets results </a> </h3>
 {% endblock %}
