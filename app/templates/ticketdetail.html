@@ -7,8 +7,8 @@
         <br>
         <h3>   {{ ticket['description'] }}   </h3>
         <br>
-        <h4> Requested at {{ ticket['created_at'] }} </h4>
-        <h4> Last updated at {{ ticket['updated_at'] }} </h4>
+        <h4> Requested at {{ moment(ticket['created_at']).fromNow() }} </h4>
+        <h4> Last updated at {{ moment(ticket['updated_at']).fromNow() }} </h4>
         <br>
         <h4> Tags:
             {% for tag in ticket['tags'] %}

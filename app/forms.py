@@ -6,7 +6,7 @@ from flask import request
 
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')
- 
+
 
 class SearchForm(FlaskForm):
     id = StringField('Request for a ticket with ID', validators=[DataRequired()])

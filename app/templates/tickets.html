@@ -8,7 +8,7 @@
             <b> {{ ticket['id'] }} </b> Ticket with subject <b><a href="{{ url_for('search', id=ticket['id']) }}">
             {{ ticket['subject'] }}</a></b>
             opened by <b> {{ ticket['requester_id'] }} </b>
-            created on <b> {{ ticket['created_at'] }} </b>
+            created <b> {{ moment(ticket['created_at']).fromNow()}} </b>
         </p>
     </div>
     {% endfor %}
