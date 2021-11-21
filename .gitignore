@@ -129,6 +129,6 @@ dmypy.json
 .pyre/
 
 # Enviroment Parameters
-
+.idea
 .env
 env.*

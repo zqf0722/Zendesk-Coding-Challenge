@@ -5,7 +5,8 @@
 ### Put the `.env` file in the top-level directory before running the application. It has all the parameters and authentication needed to request tickets from API and run the application.
 ### Then type `pip install -r requirements.txt` to install all the python packages needed for the application.
 
-### After put the `.env` in the top-level directory and install the needed packages. 
+### After put the `.env` in the top-level directory and install the needed packages.
+### Type `python test.py` to run the unittest.
 ### Type `flask run` to start the web viewer on your localhost. Use the url showed on your terminal to access the web viewer.
 ## ----Personalize----
 You can change the environment argument in .env to personalize the application.
