@@ -1,27 +1,53 @@
-<!doctype html>
-<html>
-    <head>
-        {% if title %}
-        <title>{{ title }} - Mobile Tickets Viewer</title>
-        {% else %}
-        <title>Welcome to Mobile Tickets Viewer</title>
-        {% endif %}
-    </head>
-    <body>
-        <div>
-            Mobile Tickets Viewer:
-            <a href="{{ url_for('index') }}">Home</a>
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+    Mobile Tickets Viewer
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('index') }}"> Mobile Tickets Viewer</a>
+            </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('index') }}"> Homepage </a></li>
+                </ul>
+                {% if g.search_form %}
+                <form class="navbar-form navbar-left" method="get"
+                        action="{{ url_for('search') }}">
+                    <div class="form-group">
+                        {{ g.search_form.id(size=20, class='form-control',
+                            placeholder=g.search_form.id.label.text) }}
+                    </div>
+                        {{ wtf.form_field(g.search_form.submit) }}
+                </form>
+                {% endif %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ url_for('gettickets') }}"> All tickets  </a></li>
+                </ul>
+            </div>
         </div>
-        <hr>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <ul>
             {% for message in messages %}
-            <li>{{ message }}</li>
+            <div class="alert alert-info" role="alert">{{ message }}</div>
             {% endfor %}
-        </ul>
         {% endif %}
         {% endwith %}
-        {% block content %}{% endblock %}
-    </body>
-</html>
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}
