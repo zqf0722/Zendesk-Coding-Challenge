@@ -25,7 +25,7 @@
                 <form class="navbar-form navbar-left" method="get"
                         action="{{ url_for('search') }}">
                     <div class="form-group">
-                        {{ g.search_form.id(size=20, class='form-control',
+                        {{ g.search_form.id(size=30, class='form-control',
                             placeholder=g.search_form.id.label.text) }}
                     </div>
                         {{ wtf.form_field(g.search_form.submit) }}

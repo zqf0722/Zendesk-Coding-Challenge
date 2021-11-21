@@ -12,3 +12,4 @@ class Config(object):
     SUB_DOMAIN = os.environ.get('SUB_DOMAIN')
     # Security
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'serene-joker'
+    TICKETS_PER_PAGE = os.environ.get('TICKETS_PER_PAGE') or 25

@@ -1,15 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, StringField
-from wtforms.validators import DataRequired
+from wtforms import SubmitField, IntegerField
+from wtforms.validators import NumberRange
 from flask import request
 
 
-class EmptyForm(FlaskForm):
-    submit = SubmitField('Submit')
-
-
 class SearchForm(FlaskForm):
-    id = StringField('Request for a ticket with ID', validators=[DataRequired()])
+    id = IntegerField('Request with ID', [NumberRange(min=1)])
     submit = SubmitField('Go')
 
     def __init__(self, *args, **kwargs):
