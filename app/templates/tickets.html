@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block app_content %}
-
+    <h4> {{ g.count }} total tickets, {{ len(tickets) }} on this page</h4>
     {% for ticket in tickets %}
     <div>
         <p>

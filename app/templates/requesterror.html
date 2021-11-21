@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <h1>Oops, something went wrong! Please try again later.</h1>
+    <div>
+        <h3>Here's the detailed error message: <br> {{ text }}.</h3>
+    </div>
+    <br>
+    <h4><a href="{{ url_for('index') }}"> Back to the mainpage</a></h4>
+{% endblock %}

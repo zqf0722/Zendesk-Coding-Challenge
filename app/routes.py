@@ -15,7 +15,13 @@ def before_request():
 def index():
     url = app.config['SUB_DOMAIN']+'api/v2/tickets/count'
     r = requests.get(url, auth=HTTPBasicAuth(app.config['EMAIL_ADDRESS'], app.config['API_TOKEN']))
+    if r.status_code >= 400:
+        text = r.text.replace('"', '')
+        text = text.replace('{', '')
+        text = text.replace('}', '')
+        return render_template('requesterror.html', text=text)
     num = r.json()['count']['value']
+    g.count = num
     return render_template('index.html', count=num)
 
 
@@ -24,6 +30,8 @@ def gettickets():
     defaulturl = app.config['SUB_DOMAIN'] + 'api/v2/tickets.json?page[size]=25'
     url = request.args.get('url', defaulturl, type=str)
     r = requests.get(url, auth=HTTPBasicAuth(app.config['EMAIL_ADDRESS'], app.config['API_TOKEN']))
+    if r.status_code >= 400:
+        return render_template('requesterror.html', text=r.text)
     tickets = r.json()['tickets']
     prevurl = url_for('gettickets', url=r.json()['links']['prev']) if url != defaulturl else None
     nexturl = url_for('gettickets', url=r.json()['links']['next']) if r.json()['meta']['has_more'] else None
@@ -35,6 +43,8 @@ def search():
     ticket_id = str(g.search_form.id.data)
     url = app.config['SUB_DOMAIN']+'api/v2/tickets/'+ticket_id
     r = requests.get(url, auth=HTTPBasicAuth(app.config['EMAIL_ADDRESS'], app.config['API_TOKEN']))
+    if r.status_code >= 400:
+        return render_template('requesterror.html', text=r.text)
     if 'ticket' in r.json():
         ticket = r.json()['ticket']
         return render_template('ticketdetail.html', ticket=ticket)
