@@ -1,4 +1,3 @@
-from app import app
 from app.Ticket_API import Request
 import unittest
 

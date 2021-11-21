@@ -2,13 +2,13 @@ import requests
 from requests.auth import HTTPBasicAuth
 from app import app
 from datetime import datetime
-from flask import url_for
 import json
 
 
 def modtext(text):
     out = json.loads(text)
     return out
+
 
 class Request():
     def __init__(self):
@@ -71,4 +71,3 @@ class Request():
             return True, (True, ticket)
         else:
             return True, (False, self.errormessage)
-

@@ -3,13 +3,13 @@
 
 {% block app_content %}
     <h1> Hello from Qifeng Zeng  </h1>
-<h1> <b> This is the browser-based Mobile Tickets Viewer </b> </h1>
-<h2> <a href="{{ url_for('gettickets') }}"> Request for all tickets </a> </h2>
-<h2> You can always return to the mainpage or see all the tickets from the navigation bar above </h2>
-{% if g.count>=1 %}
-<h2> Use the search window above to search the id of a specific ticket</h2>
-<h4> Valid id of tickets range from 1 to {{ g.count }} </h4>
-{% else %}
-<h4> Can't get the count of tickets right now, please try later. </h4>
-{% endif %}
+    <h1> <b> This is the browser-based Mobile Tickets Viewer </b> </h1>
+    <h2> <a href="{{ url_for('gettickets') }}"> Request for all tickets </a> </h2>
+    <h2> You can always return to the mainpage or see all the tickets from the navigation bar above </h2>
+    {% if g.count>=1 %}
+        <h2> Use the search window above to search the id of a specific ticket</h2>
+        <h4> Valid id of tickets range from 1 to {{ g.count }} </h4>
+    {% else %}
+        <h4> Can't get the count of tickets right now, please try later. </h4>
+    {% endif %}
 {% endblock %}

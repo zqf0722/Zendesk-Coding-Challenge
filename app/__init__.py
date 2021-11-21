@@ -8,4 +8,5 @@ app.config.from_object(Config)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 
+
 from app import routes, error
