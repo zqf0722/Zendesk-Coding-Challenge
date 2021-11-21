@@ -1,6 +1,7 @@
 from app.Ticket_API import Request
 import unittest
 
+# unittest for the making requests to the tickets API
 class RequestAPICase(unittest.TestCase):
     def setUp(self):
         self.request = Request()
@@ -24,7 +25,7 @@ class RequestAPICase(unittest.TestCase):
         self.assertTrue(content[0])
         self.assertIsInstance(content[1], dict)
 
-    # test if get pagination is available
+    # test if get pagination tickets is available
     def test_pageticket(self):
         flag, content = self.request.ticketspage('')
         self.assertTrue(flag,msg=content)
