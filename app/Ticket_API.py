@@ -33,7 +33,7 @@ class Request():
             # Valid response
             return True, r.json()['count']['value']
 
-    def ticketspage(self, url):
+    def ticketspage(self, url, pageid=1):
         # Request for the pagination tickets. Takes a parameter url to specify which page to request
         number = app.config['TICKETS_PER_PAGE']
         defaulturl = app.config['SUB_DOMAIN'] + 'api/v2/tickets.json?page[size]=' + str(number)
@@ -54,11 +54,12 @@ class Request():
             # Change the str type timestamps to datetime type for moment.js to modify
             ticket['created_at'] = datetime.strptime(ticket['created_at'], "%Y-%m-%dT%H:%M:%SZ")
             ticket['updated_at'] = datetime.strptime(ticket['updated_at'], "%Y-%m-%dT%H:%M:%SZ")
-        # If we are at the first page then the returned prev_url is the same as the current one
-        prevurl = r.json()['links']['prev'] if url != defaulturl else None
+        # If we are at the first page then the pageid is 1
+        prevurl = r.json()['links']['prev'] if pageid != 1 else None
         # If we are at the last page then the 'has_more' attribute is False
         nexturl = r.json()['links']['next'] if r.json()['meta']['has_more'] else None
-        return True, (tickets, prevurl, nexturl)
+        # return pageid for unittest
+        return True, (tickets, prevurl, nexturl, pageid)
 
     def alltickets(self):
         # Get all the tickets, not used in the application.

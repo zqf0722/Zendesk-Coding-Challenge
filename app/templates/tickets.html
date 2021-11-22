@@ -1,29 +1,38 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <h4> {{ g.count }} total tickets, {{ num }} on this page. Click on subject to view the detailed tickets.</h4>
-    {% for ticket in tickets %}
-    <div>
-        <p>
-            <b> {{ ticket['id'] }} </b> Ticket with subject <b><a href="{{ url_for('search', id=ticket['id']) }}">
-            {{ ticket['subject'] }}</a></b>
-            opened by <b> {{ ticket['requester_id'] }} </b>
-            created <b> {{ moment(ticket['created_at']).fromNow()}} </b>
-        </p>
+
+    {% if num==0 %}
+    <div align="center">
+        <h3> No more tickets. Return to the main page or return to the first page </h3>
+        <h4><a href="{{ url_for('index') }}"> Back to the home page</a></h4>
+        <h4><a href="{{ url_for('gettickets') }}"> Back to the first page of tickets</a></h4>
     </div>
-    {% endfor %}
-    <nav aria-label="...">
-        <ul class="pager">
-            <li class="previous{% if not prev_url %} disabled{% endif %}">
-                <a href="{{ prev_url or '#' }}">
-                    <span aria-hidden="true">&larr;</span> Previous tickets
-                </a>
-            </li>
-            <li class="next{% if not next_url %} disabled{% endif %}">
-                <a href="{{ next_url or '#' }}">
-                    More tikcets  <span aria-hidden="true">&rarr;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    {% else %}
+        <h4> {{ g.count }} total tickets, {{ num }} on this page. Click on subject to view the detailed tickets.</h4>
+        {% for ticket in tickets %}
+            <div>
+            <p>
+                <b> {{ ticket['id'] }} </b> Ticket with subject <b><a href="{{ url_for('search', id=ticket['id']) }}">
+                {{ ticket['subject'] }}</a></b>
+                opened by <b> {{ ticket['requester_id'] }} </b>
+                created <b> {{ moment(ticket['created_at']).fromNow()}} </b>
+            </p>
+        </div>
+        {% endfor %}
+        <nav aria-label="...">
+            <ul class="pager">
+                <li class="previous{% if not prev_url %} disabled{% endif %}">
+                    <a href="{{ prev_url or '#' }}">
+                        <span aria-hidden="true">&larr;</span> Previous tickets
+                    </a>
+                </li>
+                <li class="next{% if not next_url %} disabled{% endif %}">
+                    <a href="{{ next_url or '#' }}">
+                        More tickets  <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    {% endif %}
 {% endblock %}

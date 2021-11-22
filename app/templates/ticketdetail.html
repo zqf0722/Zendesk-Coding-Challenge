@@ -18,13 +18,13 @@
     </div>
     <nav aria-label="...">
         <ul class="pager">
-            <li class="previous{% if ticket['id']==1 %} disabled{% endif %}">
-                <a href="{{ url_for('search', id=ticket['id']-1) }}">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
                     <span aria-hidden="true">&larr;</span> Previous ticket
                 </a>
             </li>
-            <li class="next{% if ticket['id']==g.count %} disabled{% endif %}">
-                <a href="{{ url_for('search', id=ticket['id']+1) }}">
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
                     Next ticket  <span aria-hidden="true">&rarr;</span>
                 </a>
             </li>
