@@ -16,9 +16,14 @@ class Request():
     def __init__(self):
         # Init an error message to show when the response is invalid
         self.errormessage = 'Invalid Response'
+        self.noenv = 'There is no environment arguments provided. The .env document is missing. Please unzip' \
+                     'the env.rar file I attached in the email to find .env document and put it ' \
+                     'on the top-level directory of the project.'
 
     def getcount(self):
         # Get the total number of tickets in the account
+        if not app.config['SUB_DOMAIN']:
+            return False, self.noenv
         url = app.config['SUB_DOMAIN'] + 'api/v2/tickets/count'
         r = requests.get(url, auth=HTTPBasicAuth(app.config['EMAIL_ADDRESS'], app.config['API_TOKEN']))
         if r.status_code >= 400:
@@ -35,6 +40,8 @@ class Request():
 
     def ticketspage(self, url, pageid=1):
         # Request for the pagination tickets. Takes a parameter url to specify which page to request
+        if not app.config['SUB_DOMAIN']:
+            return False, self.noenv
         number = app.config['TICKETS_PER_PAGE']
         defaulturl = app.config['SUB_DOMAIN'] + 'api/v2/tickets.json?page[size]=' + str(number)
         if not url:
@@ -63,6 +70,8 @@ class Request():
 
     def alltickets(self):
         # Get all the tickets, not used in the application.
+        if not app.config['SUB_DOMAIN']:
+            return False, self.noenv
         url = app.config['SUB_DOMAIN'] + 'api/v2/tickets'
         r = requests.get(url, auth=HTTPBasicAuth(app.config['EMAIL_ADDRESS'], app.config['API_TOKEN']))
         if r.status_code >= 400:
@@ -81,6 +90,8 @@ class Request():
 
     def getticket(self, id):
         # Request for a single ticket with its id. Takes a parameter id to specify which ticket is requested
+        if not app.config['SUB_DOMAIN']:
+            return False, self.noenv
         url = app.config['SUB_DOMAIN'] + 'api/v2/tickets/' + str(id)
         r = requests.get(url, auth=HTTPBasicAuth(app.config['EMAIL_ADDRESS'], app.config['API_TOKEN']))
         if r.status_code >= 400:

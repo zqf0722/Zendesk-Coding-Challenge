@@ -8,9 +8,9 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 class Config(object):
     # Authorization
-    EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
-    API_TOKEN = os.environ.get('API_TOKEN')
-    SUB_DOMAIN = os.environ.get('SUB_DOMAIN')
+    EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS') or ''
+    API_TOKEN = os.environ.get('API_TOKEN') or ''
+    SUB_DOMAIN = os.environ.get('SUB_DOMAIN') or ''
     # Security
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'serene-joker'
     # How many tickets are showing per page
