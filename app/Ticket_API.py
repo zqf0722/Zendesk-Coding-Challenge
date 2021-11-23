@@ -22,7 +22,7 @@ class Request():
 
     def getcount(self):
         # Get the total number of tickets in the account
-        if not app.config['SUB_DOMAIN']:
+        if not app.config['SUB_DOMAIN'] or not app.config['EMAIL_ADDRESS'] or not app.config['API_TOKEN']:
             return False, self.noenv
         url = app.config['SUB_DOMAIN'] + 'api/v2/tickets/count'
         r = requests.get(url, auth=HTTPBasicAuth(app.config['EMAIL_ADDRESS'], app.config['API_TOKEN']))
@@ -40,7 +40,7 @@ class Request():
 
     def ticketspage(self, url, pageid=1):
         # Request for the pagination tickets. Takes a parameter url to specify which page to request
-        if not app.config['SUB_DOMAIN']:
+        if not app.config['SUB_DOMAIN'] or not app.config['EMAIL_ADDRESS'] or not app.config['API_TOKEN']:
             return False, self.noenv
         number = app.config['TICKETS_PER_PAGE']
         defaulturl = app.config['SUB_DOMAIN'] + 'api/v2/tickets.json?page[size]=' + str(number)
@@ -70,7 +70,7 @@ class Request():
 
     def alltickets(self):
         # Get all the tickets, not used in the application.
-        if not app.config['SUB_DOMAIN']:
+        if not app.config['SUB_DOMAIN'] or not app.config['EMAIL_ADDRESS'] or not app.config['API_TOKEN']:
             return False, self.noenv
         url = app.config['SUB_DOMAIN'] + 'api/v2/tickets'
         r = requests.get(url, auth=HTTPBasicAuth(app.config['EMAIL_ADDRESS'], app.config['API_TOKEN']))
@@ -90,7 +90,7 @@ class Request():
 
     def getticket(self, id):
         # Request for a single ticket with its id. Takes a parameter id to specify which ticket is requested
-        if not app.config['SUB_DOMAIN']:
+        if not app.config['SUB_DOMAIN'] or not app.config['EMAIL_ADDRESS'] or not app.config['API_TOKEN']:
             return False, self.noenv
         url = app.config['SUB_DOMAIN'] + 'api/v2/tickets/' + str(id)
         r = requests.get(url, auth=HTTPBasicAuth(app.config['EMAIL_ADDRESS'], app.config['API_TOKEN']))

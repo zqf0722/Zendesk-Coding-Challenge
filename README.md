@@ -5,9 +5,11 @@
 ### Put the `.env` file in the top-level directory before running the application. It has all the parameters and authentication needed to request tickets from API and run the application.
 ### Then type `pip install -r requirements.txt` to install all the python packages needed for the application.
 
-### After put the `.env` in the top-level directory and install the needed packages.
+### After putting the `.env` in the top-level directory and installing the needed packages.
 ### Type `python test.py` to run the unittest.
 ### Type `flask run` to start the web viewer on your localhost. Use the url showed on your terminal to access the web viewer.
 ## ----Personalize----
 You can change the environment argument in `.env` to personalize the application.
 For instance: change `SUB_DOMAIN, EMAIL_ADDRESS, API_TOKEN` to request for the tickets of your own account or change `TICKETS_PER_PAGE` to set up how many tickets are showing in one page.
+## Just to remind you again, please unzip `env.rar` which I attached in the email when submitting the challenge and put `.env` under the top-level directory (which is the same level as this README file) of the project.
+## Thank you!
