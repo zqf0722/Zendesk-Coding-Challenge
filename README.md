@@ -11,5 +11,7 @@
 ## ----Personalize----
 You can change the environment argument in `.env` to personalize the application.
 For instance: change `SUB_DOMAIN, EMAIL_ADDRESS, API_TOKEN` to request for the tickets of your own account or change `TICKETS_PER_PAGE` to set up how many tickets are showing in one page.
+
+### The default authentication method is using API token to request for tickets. If you want to use your own account, change **only** the email address and **keep** the `/token` suffix in `EMAIL_ADDRESS`, then change the `API_TOKEN` to your own token. If you want to use basic authentication. Please change the `EMAIL_ADDRESS` to your email address **without** the `/token` suffix and change the `API_TOKEN` to the password of your account.
 ## Just to remind you again, please unzip `env.rar` which I attached in the email when submitting the challenge and put `.env` under the top-level directory (which is the same level as this README file) of the project.
 ## Thank you!
