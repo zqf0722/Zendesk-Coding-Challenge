@@ -1,7 +1,41 @@
-{% extends "base.html" %}
+{% extends 'bootstrap/base.html' %}
 
-{% block app_content %}
-    <h1>An unexpected error has occurred</h1>
-    <br>
-    <h4><a href="{{ url_for('index') }}"> Back to the main page </a></h4>
+{% block title %}
+    Unexpected error!
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('index') }}"> Mobile Tickets Viewer</a>
+            </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('index') }}"> Homepage </a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ url_for('gettickets') }}"> All tickets  </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div align="center">
+        <font color="red" size="6">
+            Sorry! An unexpected error happens.
+            <br>
+            Please try again later or try to contact the administrator.
+        </font>
+        <h4><a href="{{ url_for('index') }}"> Back to the main page </a></h4>
+    </div>
+
 {% endblock %}

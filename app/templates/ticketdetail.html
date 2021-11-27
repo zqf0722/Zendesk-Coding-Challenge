@@ -30,6 +30,8 @@
             </li>
         </ul>
     </nav>
-    <h3> <a href="{{ url_for('index') }}"> Return to the Mainpage </a> </h3>
-    <h3> <a href="{{ url_for('gettickets') }}"> Return to all tickets results </a> </h3>
+    <div>
+        <a href="{{ url_for('index') }}" style="float:left"> <font size="5"> Return to the main page </font> </a>
+        <a href="{{ url_for('gettickets') }}" style="float:right"> <font size="5"> Return to all tickets results </font> </a>
+    </div>
 {% endblock %}

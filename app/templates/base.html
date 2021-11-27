@@ -25,10 +25,14 @@
                 <form class="navbar-form navbar-left" method="get"
                         action="{{ url_for('search') }}">
                     <div class="form-group">
-                        {{ g.search_form.id(size=30, class='form-control',
-                            placeholder=g.search_form.id.label.text) }}
+                        {% if g.count>=1 %}
+                            {{ g.search_form.id(size=30, class='form-control',
+                            placeholder='1 to {}'.format(g.count)) }}
+                        {% endif %}
                     </div>
-                        {{ wtf.form_field(g.search_form.submit) }}
+                        {% if g.count>=1 %}
+                            {{ wtf.form_field(g.search_form.submit) }}
+                        {% endif %}
                 </form>
                 {% endif %}
                 <ul class="nav navbar-nav navbar-right">
