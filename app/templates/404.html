@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block app_content %}
-    <font color="#FF0000"><h1> Pages Not Found, please check the url </h1></font>
-    <br>
-    <h4><a href="{{ url_for('index') }}"> Back to the main page </a></h4>
+    <div align="center">
+        <font color="#FF0000"><h1> Pages Not Found, please check the url </h1></font>
+        <br>
+        <h4><a href="{{ url_for('index') }}"> Back to the main page </a></h4>
+    </div>
 {% endblock %}
