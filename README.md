@@ -14,7 +14,7 @@ You can change the environment argument in `.env` to personalize the application
 For instance: change `SUB_DOMAIN, EMAIL_ADDRESS, API_TOKEN` to request for the tickets of your own account or change `TICKETS_PER_PAGE` to set up how many tickets are showing in one page.
 
 ## If you DO NOT want to use `.env`, please make sure that there is NO `.env` in the top-level directory. Then manually input the environment variable, they are as followed:
-`EMAIL_ADDRESS`: `{email_address}` of your Zendesk account if you are using basic authentication to request for tickets OR the `{email_address}\token` if you are using API token to request for tickets
+`EMAIL_ADDRESS`: `{email_address}` of your Zendesk account if you are using basic authentication to request for tickets OR the `{email_address}/token` if you are using API token to request for tickets
 
 `API_TOKEN`: `{password}`  of your Zendesk account if you are using basic authentication to request for tickets OR the `{apitoken}` if you are using API token to request for tickets
 
