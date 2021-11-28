@@ -59,8 +59,10 @@ class Request():
         tickets = r.json()['tickets']
         for ticket in tickets:
             # Change the str type timestamps to datetime type for moment.js to modify
-            ticket['created_at'] = datetime.strptime(ticket['created_at'], "%Y-%m-%dT%H:%M:%SZ")
-            ticket['updated_at'] = datetime.strptime(ticket['updated_at'], "%Y-%m-%dT%H:%M:%SZ")
+            if ticket['created_at']:
+                ticket['created_at'] = datetime.strptime(ticket['created_at'], "%Y-%m-%dT%H:%M:%SZ")
+            if ticket['updated_at']:
+                ticket['updated_at'] = datetime.strptime(ticket['updated_at'], "%Y-%m-%dT%H:%M:%SZ")
         # If we are at the first page then the pageid is 1
         prevurl = r.json()['links']['prev'] if pageid != 1 else None
         # If we are at the last page then the 'has_more' attribute is False
@@ -84,8 +86,10 @@ class Request():
         tickets = r.json()['tickets']
         for ticket in tickets:
             # Change the str type timestamps to datetime type for moment.js to modify
-            ticket['created_at'] = datetime.strptime(ticket['created_at'], "%Y-%m-%dT%H:%M:%SZ")
-            ticket['updated_at'] = datetime.strptime(ticket['updated_at'], "%Y-%m-%dT%H:%M:%SZ")
+            if ticket['created_at']:
+                ticket['created_at'] = datetime.strptime(ticket['created_at'], "%Y-%m-%dT%H:%M:%SZ")
+            if ticket['updated_at']:
+                ticket['updated_at'] = datetime.strptime(ticket['updated_at'], "%Y-%m-%dT%H:%M:%SZ")
         return True, tickets
 
     def getticket(self, id):
@@ -101,8 +105,10 @@ class Request():
         if 'ticket' in r.json():
             # Valid response
             ticket = r.json()['ticket']
-            ticket['created_at'] = datetime.strptime(ticket['created_at'], "%Y-%m-%dT%H:%M:%SZ")
-            ticket['updated_at'] = datetime.strptime(ticket['updated_at'], "%Y-%m-%dT%H:%M:%SZ")
+            if ticket['created_at']:
+                ticket['created_at'] = datetime.strptime(ticket['created_at'], "%Y-%m-%dT%H:%M:%SZ")
+            if ticket['updated_at']:
+                ticket['updated_at'] = datetime.strptime(ticket['updated_at'], "%Y-%m-%dT%H:%M:%SZ")
             return True, (True, ticket)
         else:
             # Invalid response

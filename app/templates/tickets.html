@@ -11,9 +11,9 @@
     {% else %}
         <h4> {{ g.count }} total tickets, {{ num }} on this page. Click on subject to view the detailed tickets.</h4>
         {% for ticket in tickets %}
-            <div>
+        <div>
             <p>
-                <b> {{ ticket['id'] }} </b> Ticket with subject <b><a href="{{ url_for('search', id=ticket['id']) }}">
+                <b> {{ ticket['id'] }}</b> {{ ticket['status'].title() }} ticket with subject <b><a href="{{ url_for('search', id=ticket['id']) }}">
                 {{ ticket['subject'] }}</a></b>
                 opened by <b> {{ ticket['requester_id'] }} </b>
                 created <b> {{ moment(ticket['created_at']).fromNow()}} </b>
